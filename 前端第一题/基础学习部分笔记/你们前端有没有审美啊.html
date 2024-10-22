@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端界面美化</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .feature-list li {
+            text-align: center;
+            padding: 10px 20px;
+        }
+
+        .feature-list li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .feature-list li:hover {
+            background-color: #6ab2ff;
+        }
+
+        .feature-list li a:hover {
+            color: #fff;
+        }
+
+        .activity-list, .upcoming-events {
+            list-style-type: none;
+        }
+
+        .activity-list li, .upcoming-events li {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activity-list li a:hover, .upcoming-events li a:hover {
+            background-color: #007BFF;
+        }
+
+        .progress-container {
+            width: 100%;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background-color: #28A745;
+            width: 80%;
+        }
+
+        .list {
+            list-style-type: none;
+            display: flex;
+        }
+
+        .list li {
+            padding: 5px 10px;
+        }
+
+        .activity-list-title, .activity-list1 {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+            margin-top: -40px;
+        }
+
+        .section1, .section2 {
+            padding: 5px 10px;
+        }
+
+        .section1 {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        .section2:hover {
+            background-color: #28A745;
+            color: #fff;
+        }
+
+        .red-list, .black-list {
+            padding: 10px;
+            list-style-type: none;
+        }
+
+        .red-list li, .black-list li {
+            padding: 5px 10px;
+        }
+
+        .red-list .activity-list-title, .black-list .activity-list-title {
+            padding: 5px 10px;
+        }
+
+        .activity-list li {
+            padding: 5px 10px;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .feature-list {
+                flex-direction: column;
+            }
+
+            .upcoming-events {
+                flex-direction: column;
+            }
+
+            .upcoming-events-title, .upcoming-events-content {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>后台管理系统</h1>
+        <h2>Welcome back，XXX</h2>
+        <ul class="feature-list">
+            <li><a href="#">一网通办</a></li>
+            <li><a href="#">云上公安</a></li>
+            <li><a href="#">智慧矫正</a></li>
+            <li><a href="#">未来社区</a></li>
+            <li><a href="#">数字乡村</a></li>
+            <li><a href="#">风险预警</a></li>
+            <li><a href="#">宏观研究</a></li>
+        </ul>
+
+        <div class="section">
+            <div class="section-title">应用场景</div>
+            <div class="list">
+                <li>党政机关</li>
+                <li>民惠直通车</li>
+                <li>数字政府</li>
+                <li>数字社会</li>
+                <li>数字法治</li>
+                <li>数字经济</li>
+                <li>数智考评驾驶舱</li>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">任务概况</div>
+            <div class="activity-list-total">
+                <div class="box1">6980项</div>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="box2">完成率：80%</div>
+            </div>
+            <ul class="activity-list-title">
+                <a>状态</a>
+                <a>占比</a>
+                <a>统计</a>
+            </ul>
+            <ul class="activity-list1">
+                <a>正常</a>
+                <a>78.32%</a>
+                <a>862项</a>
+            </ul>
+            <ul class="activity-list1">
+                <a>预警</a>
+                <a>14.19%</a>
+                <a>122项</a>
+            </ul>
+            <ul class="activity-list1">
+                <a>滞后</a>
+                <a>3.65%</a>
+                <a>32项</a>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">工作动态</div>
+            <div class="options">
+                <div class="section1">每日要情</div>
+                <div class="section2">更多</div>
+            </div>
+            <ul class="upcoming-events">
+                <li>
+                    <div class="upcoming-events-title">2021年3月23日</div>
+                    <div class="upcoming-events-content">
+                        市委常委、秘书长、改革办主任召开专题会议，听取市委深改革第九次会议以来相关建设推进落实情况...
+                    </div>
+                </li>
+                <li>
+                    <div class="upcoming-events-title">2021年3月23日</div>
+                    <div class="upcoming-events-content">
+                        市委副秘书长、政法委常务副书记陈建主持召开数字法治系统应用场景专题会议，研究诉源治理工作推进情况...
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">比学赶超</div>
+            <div class="options">
+                <div class="section1">红黑榜</div>
+                <div class="section2">赛马榜</div>
+            </div>
+            <div class="red-black-lists">
+                <ul class="red-list activity-list">
+                    <div class="activity-list-title">全市场景上线率红榜</div>
+                    <li>
+                        <span class="district">市本级</span>
+                        <span class="data">60%</span>
+                    </li>
+                    <li>
+                        <span class="district">上城区</span>
+                        <span class="data">56%</span>
+                    </li>
+                    <li>
+                        <span class="district">下城区</span>
+                        <span class="data">46%</span>
+                    </li>
+                    <li>
+                        <span class="district">江干区</span>
+                        <span class="data">38%</span>
+                    </li>
+                </ul>
+                <ul class="black-list activity-list">
+                    <div class="activity-list-title">全市场景上线率黑榜</div>
+                    <li>
+                        <span class="district">市本级</span>
+                        <span class="data">53%</span>
+                    </li>
+                    <li>
+                        <span class="district">上城区</span>
+                        <span class="data">42%</span>
+                    </li>
+                    <li>
+                        <span class="district">下城区</span>
+                        <span class="data">37%</span>
+                    </li>
+                    <li>
+                        <span class="district">江干区</span>
+                        <span class="data">28 %</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

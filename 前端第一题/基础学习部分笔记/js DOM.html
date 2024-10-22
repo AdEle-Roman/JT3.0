@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js DOM</title>
+</head>
+<body>
+    <div id="box1">这是一个ID选择器标签</div>
+    <div class="box2">这是一个类选择器标签</div>
+    <div>普通的标签</div>
+    <script>
+     var element_id =   document.getElementById("box1");
+        console.log(element_id);
+        var element_class=document.getElementsByClassName("box2")[0];
+        console.log(element_class);
+
+        var element_tage=document.getElementsByTagName("div")[2];
+        console.log(element_tage);
+        element_id.innerHTML ="修改id选择器中的内容";
+        element_class.innerText ="修改类选择器中的内容";
+    </script>
+</body>
+</html>
