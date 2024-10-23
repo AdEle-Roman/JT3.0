@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenJT AI</title>
+    <style>
+       
+       .chatbox {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px;
+        }
+        .inpext {
+            flex-grow: 1;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        .send {
+            padding: 10px 20px;
+        }
+        .message {
+            padding: 5px;
+            border-radius: 5px;
+            margin: 5px;
+           
+        }
+        .user {
+            background-color: #f0f0f0;
+        
+        }
+        .ai {
+            background-color:coral;
+            color: white;
+           
+        }
+        .title{
+            color: chocolate;
+        }
+        #lititle{
+            position: relative;
+            left: 50px;
+        }
+        .daohang{
+            position:fixed;
+            right: 0;
+            background-color: rgba(210, 105, 30, 0.388);
+            border-radius: 5px 0 0 5px;
+            width: 600px;
+            font-size:17px;
+            top: 0;
+        }
+        .gn{
+            display: flex;
+            justify-content: space-around;
+        }
+        .gn li{
+            list-style-type: none;
+            position: relative;
+            
+           
+
+           
+        }
+
+       
+    </style>
+</head>
+<body>
+   <div><h1 class="title">OpenJT AI</h1>
+    <h2 id="lititle">————开启智能未来</h2>
+</div>
+   
+   <div id="app">
+    <button id="newsession">新建会话</button>
+    <select id="sessionlist"></select>
+    <button id="delete-session">删除会话</button>
+   </div>
+
+    
+    <div class="chatbox" id="chatbox" ></div>
+    <div class="chatinput">
+        <input type="text" class="inpext" id="inpext"   placeholder="请输入您想要问的问题">
+        <button class="send" id="send">发送</button>
+        
+    </div>
+    <div class="daohang">
+        <div id="settings">
+            <ul class="gn">
+                <li>基础设置</li>
+                <br>
+                <li><label for="color-theme">配色方案</label>
+                    <select id="color-theme">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option></select>
+                    
+                </li>
+                <br>
+                <li>
+                    <label for="responselength">
+                        回答长度
+                    </label>
+                    <select id="responselength">
+                        <option value="short">简短</option>
+                        <option value="long">详细</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+
+    
+    <script>
+        let sessions = {};
+        const sessionList = document.getElementById('sessionlist');
+        const inpext = document.getElementById('inpext');
+        const chatBox = document.getElementById('chatbox');
+        const sendButton = document.getElementById('send');
+        const newSessionButton =document.getElementById('newsession');
+        const deleteSessionButton = document.getElementById('delete-session');
+        const colorThemeSelect = document.getElementById('color-theme');
+        const responseLengthSelect =  document.getElementById('responselength');
+
+        window.addEventListener('load',() => {
+            sessions = JSON.parse(localStorage.getItem('sessions')) || {};
+            populateSessionList();
+
+        })
+
+        newSessionButton.addEventListener('click', () =>{
+            const newSessionId =session-' ${Object.keys(sessions).length + 1} ';
+            sessions[newSessionId] = [];
+            localStorage.setItem('sessions',JSON.stringify(sessions));
+            populateSessionList();
+            sessionList.value = newSessionId;
+            updateChatBox(newSessionId);
+
+        })
+
+        deleteSessionButton.addEventListener('click', () =>{
+            const selectedSession = sessionList.value;
+            if(selectedSession && sessions[selectedSession]){
+                delete sessions[selectedSession];
+                localStorage.setItem('sessions',JSON.stringify(sessions));
+                populateSessionList();
+                if(Object.keys(sessions).length>0)
+            {
+                const firstSessionId = Object.keys(sessions)[0];
+                sessionList.value = firstSessionId;
+                updateChatBox(firstSessionId);
+
+            }else
+            {
+                chatBox.innerHTML = '';
+
+            }
+            }
+        })
+
+        sessionList.addEventListener('change',() =>{
+            updateChatBox(sessionList.value);});
+
+            sendButton.addEventListener('click',() => {
+                const sessionId = sessionList.value;
+                const userMessage = inpext.value.trim();
+                if(userMessage){
+                    sessions[sessionId].push({type:'user', message: userMessage});
+                    simulateAIResponse(sessionId);
+                    inpext.value = '';
+                }
+            })
+
+        
+
+        function simulateAIResponse(sessionId){
+            const aiResponse = "关于您的问题我找到以下答案...";
+            sessions[sessionId].push({
+                type: 'ai', message: aiResponse
+            });
+            updateChatBox(sessionId);
+        }
+
+        function updateChatBox(sessionId){
+            const sessionMessages = sessions[sessionId] || [];
+            chatBox.innerHTML = '';
+            sessionMessages.forEach(message =>{
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message',message.type);
+                messageElement.textContent = message.message;
+                chatBox.appendChild(messageElement);
+            });
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+        }
+
+       function populateSessionList(){
+        sessionList.innerHTML ='';
+        Object.keys(sessions).forEach(sessionId =>{
+            const option = document.createElement('option');
+            option.value = sessionId;
+            option.textContent = sessionId;
+            sessionList.appendChild(option);
+        })
+       }
+       
+       colorThemeSelect.addEventListener('change',() =>{
+
+        localStorage.setItem('colorTheme',colorThemeSelect.value);
+        updateSettings();
+
+        
+       })
+       
+       responseLengthSelect.addEventListener('change',() =>{
+        localStorage.setItem('responseLength',responseLengthSelect.value);
+       })
+       
+       
+       
+       window.addEventListener('load',updateSettings);
+
+       function updateSettings(){
+        document.body.style.backgroundColor = localStorage.getItem('colorTheme') === 'dark' ? '#333' :'#f4f4f4';}
+
+        function saveSessionData(){
+            localStorage.setItem('sessions',JSON.stringify(sessions));
+        }
+       
+       
+       
+       
+       
+       
+    </script>
+</body>
+</html>
